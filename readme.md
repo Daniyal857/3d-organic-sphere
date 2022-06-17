@@ -1,12 +1,12 @@
-# Three.js - Template - Complex
+# 3d-organic-sphere
 
-🚧 This template is under construction
+[Live Link](#)
 
 ## Setup
-Download [Node.js](https://nodejs.org/en/download/).
-Run this followed commands:
 
-``` bash
+Download [Node.js](https://nodejs.org/en/download/). Run this followed commands:
+
+```bash
 # Install dependencies (only the first time)
 npm install
 
@@ -16,4 +16,3 @@ npm run dev
 # Build for production in the dist/ directory
 npm run build
 ```
-# 3d-organic-sphere
