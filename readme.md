@@ -2,6 +2,8 @@
 
 [Live Link](#)
 
+this is made possible, all thanks to bruno twitch streams :)
+
 ## Setup
 
 Download [Node.js](https://nodejs.org/en/download/). Run this followed commands:
