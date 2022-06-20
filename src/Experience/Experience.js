@@ -70,8 +70,8 @@ export default class Experience {
 
   setDebug() {
     if (this.config.debug) {
-      this.debug = new Pane();
-      this.debug.containerElem_.style.width = '320px';
+      this.debugPane = new Pane();
+      this.debugPane.containerElem_.style.width = '320px';
     }
   }
 
