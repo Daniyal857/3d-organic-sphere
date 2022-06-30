@@ -60,7 +60,7 @@ void main() {
   // Fresnel
   vec3 viewDirection = normalize(displacedPosition.xyz - cameraPosition);
   float fresnel = uFresnelOffset + (1.0 + dot(viewDirection, computedNormal)) * uFresnelMultiplier;
-  fresnel = pow(fresnel, uFresnelPower);
+  fresnel = pow(max(0.0, fresnel), uFresnelPower);
 
   // Color - this as an old way of creating light and its super performant
   float lightAIntensity = max(0.0, -dot(computedNormal.xyz, normalize(- uLightAPosition))) * uLightAIntensity;
@@ -70,7 +70,7 @@ void main() {
   // color = mix(color, uLightAColor, fresnel);
   color = mix(color, uLightAColor, lightAIntensity * fresnel);
   color = mix(color, uLightBColor, lightBIntensity * fresnel);
-  color = mix(color, vec3(1.0), clamp(pow(fresnel - 0.8, 3.0), 0.0, 1.0));
+  color = mix(color, vec3(1.0), clamp(pow(max(0.0, fresnel - 0.8), 3.0), 0.0, 1.0));
 
   // Varying
   vColor = color;
