@@ -10,7 +10,7 @@ export default class Sphere {
     this.scene = this.experience.scene;
     this.time = this.experience.time;
 
-    this.timeFrequency = 0.0001;
+    this.timeFrequency = 0.0003;
 
     if (this.debugPane) {
       this.debugFolder = this.debugPane.addFolder({
@@ -37,10 +37,10 @@ export default class Sphere {
     // Light A
     this.lights.a = {};
 
-    this.lights.a.intensity = 1;
+    this.lights.a.intensity = 4.5;
 
     this.lights.a.color = {};
-    this.lights.a.color.value = '#ff2900';
+    this.lights.a.color.value = '#ff3e00';
     this.lights.a.color.instance = new THREE.Color(this.lights.a.color.value);
 
     this.lights.a.spherical = new THREE.Spherical(1, 0.615, 2.049);
@@ -48,10 +48,10 @@ export default class Sphere {
     // Light B
     this.lights.b = {};
 
-    this.lights.b.intensity = 1;
+    this.lights.b.intensity = 2;
 
     this.lights.b.color = {};
-    this.lights.b.color.value = '#4145af';
+    this.lights.b.color.value = '#0063ff';
     this.lights.b.color.instance = new THREE.Color(this.lights.b.color.value);
 
     this.lights.b.spherical = new THREE.Spherical(1, 2.561, -1.844);
@@ -125,16 +125,27 @@ export default class Sphere {
       uniforms: {
         uLightAColor: { value: this.lights.a.color.instance },
         uLightAPosition: { value: new THREE.Vector3(1.0, 1.0, 0.0) },
-        uLightAIntensity: { value: 1 },
+        uLightAIntensity: { value: this.lights.a.intensity },
 
         uLightBColor: { value: this.lights.b.color.instance },
         uLightBPosition: { value: new THREE.Vector3(-1.0, -1.0, 0.0) },
-        uLightBIntensity: { value: 1 },
+        uLightBIntensity: { value: this.lights.b.intensity },
 
-        uDistortionFrequency: { value: 2.0 },
-        uDistortionStrength: { value: 1.0 },
-        uDisplacementFrequency: { value: 2.0 },
-        uDisplacementStrength: { value: 0.2 },
+        uSubdivision: {
+          value: new THREE.Vector2(
+            this.geometry.parameters.widthSegments,
+            this.geometry.parameters.heightSegments
+          )
+        },
+
+        uDistortionFrequency: { value: 1.5 },
+        uDistortionStrength: { value: 0.65 },
+        uDisplacementFrequency: { value: 2.12 },
+        uDisplacementStrength: { value: 0.152 },
+
+        uFresnelOffset: { value: -1.0 },
+        uFresnelMultiplier: { value: 2.12 },
+        uFresnelPower: { value: 1.793 },
 
         uTime: { value: 0 }
       },
@@ -173,6 +184,23 @@ export default class Sphere {
         'value',
         { label: 'uDisplacementStrength', min: 0, max: 1, step: 0.001 }
       );
+      // Fresnel
+      this.debugFolder.addInput(
+        this.material.uniforms.uFresnelOffset,
+        'value',
+        { label: 'uFresnelOffset', min: -2, max: 2, step: 0.001 }
+      );
+      this.debugFolder.addInput(
+        this.material.uniforms.uFresnelMultiplier,
+        'value',
+        { label: 'uFresnelMultiplier', min: 0, max: 5, step: 0.001 }
+      );
+      this.debugFolder.addInput(this.material.uniforms.uFresnelPower, 'value', {
+        label: 'uFresnelPower',
+        min: 0,
+        max: 5,
+        step: 0.001
+      });
     }
   }
 
