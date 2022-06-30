@@ -1,6 +1,6 @@
 # 3d-organic-sphere
 
-[Live Link](#)
+[Live Link](http://3d-organic-sphere.vercel.app/)
 
 this is made possible, all thanks to bruno twitch streams :)
 
