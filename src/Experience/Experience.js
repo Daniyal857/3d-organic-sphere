@@ -65,6 +65,7 @@ export default class Experience {
   setStats() {
     if (this.config.debug) {
       this.stats = new Stats(true);
+      this.stats.instance.showPanel(0);
     }
   }
 
